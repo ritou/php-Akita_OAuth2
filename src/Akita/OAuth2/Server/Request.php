@@ -14,20 +14,17 @@
 class Akita_OAuth2_Request
 {
     private $param;
-    private $env;
+    private $method;
 
     public function __construct($endpoint_type='authorization',
-                                $env, 
                                 $server, 
-                                $param=array())
+                                $params=array())
     {
-        $this->param = $param;
-        $this->env = $env;
+        $this->param = $params;
+        $this->method = $server['REQUEST_METHOD'];
 
         if( $endpoint_type=='token' &&
-            !empty($server) && 
-            is_array($server) &&
-            $server['REQUEST_METHOD']=='POST')
+            $this->method=='POST')
         {
             // Decode Basic Authorization Header
             if( isset($server['PHP_AUTH_USER']) &&
