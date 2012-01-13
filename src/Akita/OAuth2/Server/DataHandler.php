@@ -45,7 +45,7 @@ abstract class Akita_OAuth2_Server_DataHandler
      * @param string $password User's Password
      * @return string user identifier or throw Exception
      */
-    abstract public function get_user_id( $username, $password );
+    abstract public function getUserId( $username, $password );
 
     /**
      * create or update AuthInfo
@@ -53,7 +53,7 @@ abstract class Akita_OAuth2_Server_DataHandler
      * @param array $params params for generate AuthInfo
      * @return Akita_OAuth2_Model_Authinfo object
      */
-    abstract public function create_or_update_auth_info( $params );
+    abstract public function createOrUpdateAuthInfo( $params );
 
     /**
      * create or update AccessToken
@@ -61,7 +61,7 @@ abstract class Akita_OAuth2_Server_DataHandler
      * @param array $params params for issue new Access Toen
      * @return Akita_OAuth2_Model_AccessToken object
      */
-    abstract public function create_or_update_access_token( $params );
+    abstract public function createOrUpdateAccessToken( $params );
 
     /**
      * validate Authorization Code and return related AuthInfo
@@ -69,15 +69,15 @@ abstract class Akita_OAuth2_Server_DataHandler
      * @param string $code Authrization Code
      * @return Akita_OAuth2_Model_Authinfo object
      */
-    abstract public function get_auth_info_by_code( $code );
+    abstract public function getAuthInfoByCode( $code );
 
     /**
      * validate Authorization Code and return related AuthInfo
      *
-     * @param string $code Authrization Code
+     * @param string $refreshToken Refresh Token
      * @return Akita_OAuth2_Model_Authinfo object
      */
-    abstract public function get_auth_info_by_refresh_token( $refresh_token );
+    abstract public function getAuthInfoByRefreshToken( $refreshToken );
 
     /**
      * validate Access Token Scting and return Access Token object
@@ -85,39 +85,48 @@ abstract class Akita_OAuth2_Server_DataHandler
      * @param string $token Access Token String in HTTP Request
      * @return Akita_OAuth2_Model_AccessToken object
      */
-    abstract public function get_access_token( $token );
+    abstract public function getAccessToken( $token );
 
     /**
      * get AuthInfo object from auth_id which is member of Access Token object
      *
-     * @param string $auth_id Identifier of AuthInfo
+     * @param string $authId Identifier of AuthInfo
      * @return Akita_OAuth2_Model_Authinfo object
      */
-    abstract public function get_auth_info_by_id( $auth_id );
+    abstract public function getAuthInfoById( $authId );
 
     /**
      * validate client crdential and grant type
      *
-     * @param string $client_id Client ID
-     * @param string $client_secret Client Secret 
-     * @param string $grant_type Grant Type 
+     * @param string $clientId Client ID
+     * @param string $clientSecret Client Secret 
+     * @param string $grantType Grant Type 
      * @return boolean vavalidation result
      */
-    abstract public function validate_client( $client_id, $client_secret, $grant_type );
+    abstract public function validateClient( $clientId, $clientSecret, $grantType );
 
     /**
-     * check cient after checking AccessToken and AuthInfo
+     * check client
      *
-     * @param string $client_id Client Identifier of AuthInfo
+     * @param string $clientId Client Identifier of AuthInfo
      * @return boolen
      */
-    abstract public function validate_client_by_id( $client_id );
+    abstract public function validateClientById( $clientId );
 
     /**
-     * check user after checking AccessToken and AuthInfo
+     * check user
      *
-     * @param string $user_id User Identifier of AuthInfo
+     * @param string $userId User Identifier of AuthInfo
      * @return boolen
      */
-    abstract public function validate_user_by_id( $user_id );
+    abstract public function validateUserById( $userId );
+
+    /**
+     * check scope and Client ID
+     *
+     * @param string $clientId Client ID
+     * @param string $scope Sope parameter
+     * @return boolen
+     */
+    abstract public function validateScope( $clientId, $scope );
 }

@@ -26,4 +26,8 @@ class Akita_OAuth2_Model_AccessToken
     public function __set($name, $value){
         $this->$name = $value;
     }  
+
+    public function is_expired(){
+        return ((int)$this->created_on + (int)$this->expires_in >= time());
+    }
 }

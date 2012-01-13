@@ -1,6 +1,6 @@
 <?php
 /**
- * Akita_OAuth2_Request
+ * Akita_OAuth2_Server_Request
  *
  * Simple HTTP Request class for OAuth 2.0 Endpoint.
  *
@@ -11,7 +11,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  * @link      http://
  */
-class Akita_OAuth2_Request
+class Akita_OAuth2_Server_Request
 {
     private $param;
     private $method;
