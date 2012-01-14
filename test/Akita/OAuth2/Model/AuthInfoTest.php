@@ -2,7 +2,7 @@
 
 require_once dirname(__FILE__) . '/../../../../src/Akita/OAuth2/Model/AuthInfo.php';
 
-class AccessTokenTest extends PHPUnit_Framework_TestCase
+class Akita_OAuth2_Model_AuthInfo_Test extends PHPUnit_Framework_TestCase
 {
     public function testAccessor()
     {

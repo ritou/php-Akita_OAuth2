@@ -18,6 +18,13 @@ class Akita_OAuth2_Model_AccessToken
     private $expires_in;
     private $created_on;
 
+    public function __construct($auth_id='', $token='', $expires_in=0, $created_on=0){
+        $this->auth_id = $auth_id;
+        $this->token = $token;
+        $this->expires_in = $expires_in;
+        $this->created_on = $creatd_on;
+    }
+
     // Accessor
     public function __get($name){ 
         return $this->$name;
@@ -27,7 +34,7 @@ class Akita_OAuth2_Model_AccessToken
         $this->$name = $value;
     }  
 
-    public function is_expired(){
-        return ((int)$this->created_on + (int)$this->expires_in >= time());
+    public function isExpired(){
+        return ((int)$this->created_on + (int)$this->expires_in < time());
     }
 }
