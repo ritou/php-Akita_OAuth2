@@ -13,16 +13,16 @@
  */
 class Akita_OAuth2_Model_AccessToken
 {
-    private $auth_id;
+    private $authId;
     private $token;
-    private $expires_in;
-    private $created_on;
+    private $expiresIn;
+    private $createdOn;
 
-    public function __construct($auth_id='', $token='', $expires_in=0, $created_on=0){
-        $this->auth_id = $auth_id;
+    public function __construct($authId='', $token='', $expiresIn=0, $createdOn=0){
+        $this->auth_id = $authId;
         $this->token = $token;
-        $this->expires_in = $expires_in;
-        $this->created_on = $creatd_on;
+        $this->expiresIn = $expiresIn;
+        $this->createdOn = $creatd_on;
     }
 
     // Accessor
@@ -34,7 +34,15 @@ class Akita_OAuth2_Model_AccessToken
         $this->$name = $value;
     }  
 
-    public function isExpired(){
-        return ((int)$this->created_on + (int)$this->expires_in < time());
+    final public function isExpired(){
+        return ((int)$this->createdOn + (int)$this->expiresIn < time());
+    }
+
+    public function getResponse(){
+        $res = array(
+            'access_token'  => $this->token,
+            'expires_in'  => $this->expiresIn
+        );
+        return $res;
     }
 }

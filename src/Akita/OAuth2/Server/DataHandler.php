@@ -36,7 +36,7 @@ abstract class Akita_OAuth2_Server_DataHandler
      *
      * @return Akita_OAuth2_Server_Request object
      */
-    abstract public function request();
+    abstract public function getRequest();
 
     /**
      * validate username(or email)/password and return user_id

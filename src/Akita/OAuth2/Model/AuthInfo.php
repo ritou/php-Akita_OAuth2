@@ -13,13 +13,13 @@
  */
 class Akita_OAuth2_Model_AuthInfo
 {
-    private $auth_id;
-    private $user_id;
-    private $client_id;
+    private $authId;
+    private $userId;
+    private $clientId;
     private $scope;
-    private $refresh_token;
+    private $refreshToken;
     private $code;
-    private $redirecturi;
+    private $redirectUri;
 
     // Accessor
     public function __get($name){ 
