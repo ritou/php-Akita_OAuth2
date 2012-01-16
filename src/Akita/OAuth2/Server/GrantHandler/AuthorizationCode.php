@@ -83,7 +83,7 @@ class Akita_OAuth2_Server_GrantHandler_AuthorizationCode
             );
         }
 
-        if(empty($authInfo->redirectUri) || $authInfo->redirectUri != $redirect_uri){
+        if($authInfo->redirectUri != $redirect_uri){
             throw new Akita_OAuth2_Server_Error(
                 '400',
                 'invalid_grant',
@@ -92,13 +92,13 @@ class Akita_OAuth2_Server_GrantHandler_AuthorizationCode
         }
 
         // obtain AccessToken from AuthInfo
-        $acessToken = $dataHandler->createOrUpdateAccessToken(
+        $accessToken = $dataHandler->createOrUpdateAccessToken(
             array(
                 'authInfo'  => $authInfo
             )
         );
 
-        if(is_null($acessToken)){
+        if(is_null($accessToken)){
             throw new Akita_OAuth2_Server_Error(
                 '500',
                 'server_error'
@@ -107,7 +107,7 @@ class Akita_OAuth2_Server_GrantHandler_AuthorizationCode
 
         // build response
         $res = $accessToken->getResponse();
-        $res['refresh_token'] = $authInfo->refresh_token;
+        $res['refresh_token'] = $authInfo->refreshToken;
 
         return $res;
     }
