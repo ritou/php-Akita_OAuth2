@@ -75,7 +75,7 @@ class Akita_OAuth2_Server_GrantHandler_AuthorizationCode
             );
         }
 
-        if($authInfo->client_id != $client_id){
+        if($authInfo->clientId != $client_id){
             throw new Akita_OAuth2_Server_Error(
                 '400',
                 'invalid_grant',
@@ -83,7 +83,7 @@ class Akita_OAuth2_Server_GrantHandler_AuthorizationCode
             );
         }
 
-        if(empty($authInfo->redirect_uri) && $authInfo->redirect_uri != $redirect_uri){
+        if(empty($authInfo->redirectUri) || $authInfo->redirectUri != $redirect_uri){
             throw new Akita_OAuth2_Server_Error(
                 '400',
                 'invalid_grant',
