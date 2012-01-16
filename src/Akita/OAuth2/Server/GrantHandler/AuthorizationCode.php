@@ -42,7 +42,7 @@ class Akita_OAuth2_Server_GrantHandler_AuthorizationCode
             throw new Akita_OAuth2_Server_Error(
                 '400',
                 'invalid_request',
-                "'code' not found"
+                "'code' is required"
             );
         }
 
@@ -51,7 +51,7 @@ class Akita_OAuth2_Server_GrantHandler_AuthorizationCode
             throw new Akita_OAuth2_Server_Error(
                 '400',
                 'invalid_request',
-                "'redirect_uri' not found"
+                "'redirect_uri' is required"
             );
         }
 
@@ -71,7 +71,7 @@ class Akita_OAuth2_Server_GrantHandler_AuthorizationCode
             throw new Akita_OAuth2_Server_Error(
                 '400',
                 'invalid_grant',
-                "invalid 'code'"
+                "'code' is invalid"
             );
         }
 
@@ -79,7 +79,7 @@ class Akita_OAuth2_Server_GrantHandler_AuthorizationCode
             throw new Akita_OAuth2_Server_Error(
                 '400',
                 'invalid_grant',
-                "'client_id' mismatch"
+                "'client_id' is not matched"
             );
         }
 
@@ -87,7 +87,7 @@ class Akita_OAuth2_Server_GrantHandler_AuthorizationCode
             throw new Akita_OAuth2_Server_Error(
                 '400',
                 'invalid_grant',
-                "'redirect_uri' mismatch"
+                "'redirect_uri' is not matched"
             );
         }
 
@@ -108,7 +108,6 @@ class Akita_OAuth2_Server_GrantHandler_AuthorizationCode
         // build response
         $res = $accessToken->getResponse();
         $res['refresh_token'] = $authInfo->refresh_token;
-        $res['scope'] = $authInfo->scope;
 
         return $res;
     }
