@@ -33,12 +33,6 @@ require_once dirname(__FILE__) . '/../Error.php';
  */
 class Akita_OAuth2_Server_GrantHandler_AuthorizationCode
 {
-    /**
-     * return DataHandler for each Grant Type
-     *
-     * @param string $grantType Grant Type
-     * @return Akita_OAut2_Server_GrantHandler_* or null
-     */
     public function handleRequest($dataHandler)
     {
         $request = $dataHandler->getRequest();
@@ -75,7 +69,7 @@ class Akita_OAuth2_Server_GrantHandler_AuthorizationCode
         $authInfo = $dataHandler->getAuthInfoByCode($code);
         if(is_null($authInfo)){
             throw new Akita_OAuth2_Server_Error(
-                '401',
+                '400',
                 'invalid_grant',
                 "invalid 'code'"
             );
@@ -83,7 +77,7 @@ class Akita_OAuth2_Server_GrantHandler_AuthorizationCode
 
         if($authInfo->client_id != $client_id){
             throw new Akita_OAuth2_Server_Error(
-                '401',
+                '400',
                 'invalid_grant',
                 "'client_id' mismatch"
             );
@@ -91,7 +85,7 @@ class Akita_OAuth2_Server_GrantHandler_AuthorizationCode
 
         if(empty($authInfo->redirect_uri) && $authInfo->redirect_uri != $redirect_uri){
             throw new Akita_OAuth2_Server_Error(
-                '401',
+                '400',
                 'invalid_grant',
                 "'redirect_uri' mismatch"
             );
