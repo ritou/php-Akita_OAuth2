@@ -129,4 +129,13 @@ abstract class Akita_OAuth2_Server_DataHandler
      * @return boolen
      */
     abstract public function validateScope( $clientId, $scope );
+
+    /**
+     * check scope and AuthInfo
+     *
+     * @param string $scope Sope parameter
+     * @param Akita_OAuth2_Model_Authinfo $authInfo AuthInfo
+     * @return boolen
+     */
+    abstract public function validateScopeForTokenRefresh( $scope, $authInfo);
 }
