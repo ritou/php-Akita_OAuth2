@@ -43,7 +43,7 @@ abstract class Akita_OAuth2_Server_DataHandler
      *
      * @param string $username User's Name or Email
      * @param string $password User's Password
-     * @return string user identifier or throw Exception
+     * @return string user identifier or null
      */
     abstract public function getUserId( $username, $password );
 
