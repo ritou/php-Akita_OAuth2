@@ -68,6 +68,10 @@ class DataHandler_ClientCredentials_Test
         return false;
     }
 
+    public function validateRedirectUri( $clientId, $redirectUri){
+        return false;
+    }
+
     public function validateScope( $clientId, $scope ){
         if($clientId == 'valid_client_id' && $scope == 'valid_scope'){
             return true;

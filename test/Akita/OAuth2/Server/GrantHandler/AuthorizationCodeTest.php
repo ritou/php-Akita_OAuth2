@@ -72,6 +72,10 @@ class DataHandler_AuthorizationCode_Test
         return false;
     }
 
+    public function validateRedirectUri( $clientId, $redirectUri){
+        return false;
+    }
+
     public function validateScope( $clientId, $scope ){
         return false;
     }

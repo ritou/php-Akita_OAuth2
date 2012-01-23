@@ -122,6 +122,15 @@ abstract class Akita_OAuth2_Server_DataHandler
     abstract public function validateUserById( $userId );
 
     /**
+     * check redirect_uri and Client ID
+     *
+     * @param string $clientId Client ID
+     * @param string $redirect_uri redirect_uri Parameter
+     * @return boolen
+     */
+    abstract public function validateRedirectUri( $clientId, $redirectUri );
+
+    /**
      * check scope and Client ID
      *
      * @param string $clientId Client ID
