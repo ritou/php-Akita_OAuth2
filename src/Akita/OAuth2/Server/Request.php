@@ -16,7 +16,7 @@ class Akita_OAuth2_Server_Request
     private $param;
     private $method;
 
-    public function __construct($endpoint_type='authorization',
+    public function __construct($endpoint_type,
                                 $server, 
                                 $params=array())
     {

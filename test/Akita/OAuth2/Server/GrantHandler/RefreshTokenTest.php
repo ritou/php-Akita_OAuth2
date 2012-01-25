@@ -24,7 +24,11 @@ class DataHandler_RefreshToken_Test
         return $this->_request;
     }
 
-    public function getUserId( $username, $password ){
+    public function getUserId(){
+        return null;
+    }
+
+    public function getUserIdByCredentials( $username, $password ){
         return null;
     }
 

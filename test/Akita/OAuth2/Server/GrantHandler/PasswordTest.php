@@ -24,7 +24,11 @@ class DataHandler_Password_Test
         return $this->_request;
     }
 
-    public function getUserId( $username, $password ){
+    public function getUserId(){
+        return null;
+    }
+
+    public function getUserIdByCredentials( $username, $password ){
         if($username == 'valid_username' && $password == 'valid_password'){
             return 'valid_user_id';
         }else{

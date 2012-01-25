@@ -63,7 +63,7 @@ class Akita_OAuth2_Server_GrantHandler_Password
                 "'password' is required"
             );
         }
-        $user_id = $dataHandler->getUserId( $username, $password );
+        $user_id = $dataHandler->getUserIdByCredentials( $username, $password );
         if(is_null($user_id)){
             throw new Akita_OAuth2_Server_Error(
                 '400',

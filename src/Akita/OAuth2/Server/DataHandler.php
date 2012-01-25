@@ -39,13 +39,20 @@ abstract class Akita_OAuth2_Server_DataHandler
     abstract public function getRequest();
 
     /**
+     * return user_id from request
+     *
+     * @return string user identifier or null
+     */
+    abstract public function getUserId();
+
+    /**
      * validate username(or email)/password and return user_id
      *
      * @param string $username User's Name or Email
      * @param string $password User's Password
      * @return string user identifier or null
      */
-    abstract public function getUserId( $username, $password );
+    abstract public function getUserIdByCredentials( $username, $password );
 
     /**
      * create or update AuthInfo
