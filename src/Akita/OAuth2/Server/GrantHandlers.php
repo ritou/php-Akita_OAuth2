@@ -16,7 +16,11 @@
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  * @link      http://
  */
-require_once dirname(__FILE__) . '/GrantHandler/*.php';
+require_once dirname(__FILE__) . '/GrantHandler/AuthorizationCode.php';
+require_once dirname(__FILE__) . '/GrantHandler/RefreshToken.php';
+require_once dirname(__FILE__) . '/GrantHandler/ClientCredentials.php';
+require_once dirname(__FILE__) . '/GrantHandler/Password.php';
+require_once dirname(__FILE__) . '/Error.php';
 
 /**
  * Akita_OAuth2_Server_GrantHandlers
@@ -46,16 +50,17 @@ class Akita_OAuth2_Server_GrantHandlers
             case 'refresh_token':
                 $handler = new Akita_OAuth2_Server_GrantHandler_RefreshToken();
                 break;
-/*
             case 'client_credentials':
                 $handler = new Akita_OAuth2_Server_GrantHandler_ClientCredentials();
                 break;
             case 'password':
                 $handler = new Akita_OAuth2_Server_GrantHandler_Password();
                 break;
-*/
             default:
-                $handler = null;
+                throw new Akita_OAuth2_Server_Error(
+                    '400',
+                    'unsupported_grant_type'
+                );
         }
         return $handler;
     }
