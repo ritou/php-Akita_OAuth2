@@ -32,12 +32,15 @@ class Akita_OAuth2_Server_Request
 {
     public $param;
     public $method;
+    public $header;
 
     public function __construct($endpoint_type,
                                 $server, 
-                                $params=array())
+                                $params=array(),
+                                $headers=array())
     {
         $this->param = $params;
+        $this->header = $headers;
         $this->method = $server['REQUEST_METHOD'];
 
         if( $endpoint_type=='token' &&
@@ -53,5 +56,14 @@ class Akita_OAuth2_Server_Request
                 $this->param['client_secret'] = $server['PHP_AUTH_PW'];
             }
         }
+    }
+
+    public function getAccessToken(){
+        $accessToken = $this->param['access_token'];
+        $authorizationHeader = $this->header['Authorization'];
+        if(!empty($authorizationHeader) && substr($authorizationHeader, 0, 7) == 'Bearer '){
+            $accessToken = ltrim(substr($authorizationHeader, 7));
+        }
+        return $accessToken;
     }
 }

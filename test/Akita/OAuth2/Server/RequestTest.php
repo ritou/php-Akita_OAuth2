@@ -51,4 +51,47 @@ class Akita_OAuth2_Server_Request_Test extends PHPUnit_Framework_TestCase
         $this->assertEquals('client_id_value_from_basic', $tmp_param['client_id'], 'Invalid param');
         $this->assertEquals('client_secret_value_from_basic', $tmp_param['client_secret'], 'Invalid param');
     }
+
+    public function testAuthorizationRequestWithHeaders()
+    {
+        $server = array (
+                        'REQUEST_METHOD' => 'GET'
+                        );
+        $params = array();
+        $headers = array(
+                        'Authorization' => 'Bearer param_access_token'
+                        );
+        $request = new Akita_OAuth2_Server_Request('authorization', $server, $params, $headers);
+        $this->assertEquals('Bearer param_access_token', $request->header['Authorization'], 'Invalid header');
+        $this->assertEquals('param_access_token', $request->getAccessToken(), 'Invalid Access Token');
+    }
+
+    public function testAuthorizationRequestWithNoHeaders()
+    {
+        $server = array (
+                        'REQUEST_METHOD' => 'GET'
+                        );
+        $params = array(
+                        'access_token' => 'header_access_token'
+        );
+        $headers = array();
+        $request = new Akita_OAuth2_Server_Request('authorization', $server, $params, $headers);
+        $this->assertEquals('header_access_token', $request->param['access_token'], 'Invalid Access Token param');
+        $this->assertEquals('header_access_token', $request->getAccessToken(), 'Invalid Access Token');
+    }
+
+    public function testAuthorizationRequestWithParamAndHeaders()
+    {
+        $server = array (
+                        'REQUEST_METHOD' => 'GET'
+                        );
+        $params = array(
+                        'access_token' => 'param_access_token'
+        );
+        $headers = array(
+                        'Authorization' => 'Bearer header_access_token'
+                        );
+        $request = new Akita_OAuth2_Server_Request('authorization', $server, $params, $headers);
+        $this->assertEquals('header_access_token', $request->getAccessToken(), 'Invalid Access Token');
+    }
 }
