@@ -13,20 +13,28 @@
  */
 class Akita_OAuth2_Model_AuthInfo
 {
-    private $authId;
-    private $userId;
-    private $clientId;
-    private $scope;
-    private $refreshToken;
-    private $code;
-    private $redirectUri;
+    public $authId;
+    public $userId;
+    public $clientId;
+    public $scope;
+    public $refreshToken;
+    public $code;
+    public $redirectUri;
 
-    // Accessor
-    public function __get($name){ 
-        return $this->$name;
-    }  
-
-    public function __set($name, $value){
-        $this->$name = $value;
-    }  
+    public function __construct(    $authId='', 
+                                    $userId='', 
+                                    $clientId='', 
+                                    $scope='', 
+                                    $refreshToken='', 
+                                    $code='', 
+                                    $redirectUri=''
+    ){
+        $this->authId   = $authId;
+        $this->userId   = $userId;
+        $this->clientId = $clientId;
+        $this->scope    = $scope;
+        $this->refreshToken    = $refreshToken;
+        $this->code    = $code;
+        $this->redirectUri    = $redirectUri;
+    }
 }

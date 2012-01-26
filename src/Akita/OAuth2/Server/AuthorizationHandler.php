@@ -32,6 +32,11 @@ require_once dirname(__FILE__) . '/Error.php';
  */
 class Akita_OAuth2_Server_AuthorizationHandler
 {
+    /**
+     * process Authorization Request
+     *
+     * @param Akita_OAuth2_Server_DataHandler $dataHandler
+     */
     public function processAuthorizationRequest($dataHandler)
     {
         $request = $dataHandler->getRequest();
@@ -94,6 +99,11 @@ class Akita_OAuth2_Server_AuthorizationHandler
         }
     }
 
+    /**
+     * create AuthInfo and AccessToken and build response
+     *
+     * @param Akita_OAuth2_Server_DataHandler $dataHandler
+     */
     public function allowAuthorizationRequest($dataHandler)
     {
         $this->processAuthorizationRequest( $dataHandler );
@@ -165,6 +175,11 @@ class Akita_OAuth2_Server_AuthorizationHandler
         return $res;
     }
 
+    /**
+     * build denied response
+     *
+     * @param Akita_OAuth2_Server_DataHandler $dataHandler
+     */
     public function denyAuthorizationRequest($dataHandler)
     {
         $this->processAuthorizationRequest( $dataHandler );
