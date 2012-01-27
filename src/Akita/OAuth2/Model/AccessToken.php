@@ -24,7 +24,7 @@ class Akita_OAuth2_Model_AccessToken
         $this->token = $token;
         $this->scope = $scope;
         $this->expiresIn = $expiresIn;
-        $this->createdOn = $creatdOn;
+        $this->createdOn = $createdOn;
     }
 
     final public function isExpired(){
