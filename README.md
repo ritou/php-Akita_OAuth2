@@ -1,6 +1,6 @@
-Akita_OAuth
+Akita_OAuth2
 ======================================================
-This is OAuth 2.0 php Library which is converted from OAuth::Lite2@CPAN.
+This is php OAuth 2.0 Server Library.
 
 LISENCE
 ------------------------------------------------------
