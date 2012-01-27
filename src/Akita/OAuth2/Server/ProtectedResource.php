@@ -16,6 +16,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  * @link      http://
  */
+require_once dirname(__FILE__) . '/Error.php';
 
 /**
  * Akita_OAuth2_Server_ProtectedResource
@@ -39,19 +40,21 @@ class Akita_OAuth2_Server_ProtectedResource
     public function processRequest($dataHandler)
     {
         $request = $dataHandler->getRequest();
-        $access_token_str = $request->getAccessToken();
-        if(empty($accessToken)){
+        $param_access_token = $request->getAccessToken();
+        if(empty($param_access_token)){
             throw new Akita_OAuth2_Server_Error(
-                '401',
-                'invalid_request'
+                '400',
+                'invalid_request',
+                "'access_token' is required"
             );
         }
-        $accessToken = $dataHandler->getAccessToken($access_token_str);
+        $accessToken = $dataHandler->getAccessToken($param_access_token);
         if(is_null($accessToken)){
             throw new Akita_OAuth2_Server_Error(
                 '401',
                 'invalid_token'
             );
         }
+        return $accessToken;
     }
 }
