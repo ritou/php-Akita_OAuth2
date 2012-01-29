@@ -461,6 +461,7 @@ class Akita_OAuth2_Server_AuthorizationHandler_Test extends PHPUnit_Framework_Te
         $authHandler = new Akita_OAuth2_Server_AuthorizationHandler();
         try{
             $res = $authHandler->allowAuthorizationRequest($dataHandler);
+            $this->assertEquals('http://valid_redirect_uri/', $res['redirect_uri']);
             $this->assertEquals('test_code', $res['query']['code']);
             $this->assertEmpty($res['query']['state']);
         }catch(Akita_OAuth2_Server_Error $error){
@@ -489,6 +490,7 @@ class Akita_OAuth2_Server_AuthorizationHandler_Test extends PHPUnit_Framework_Te
         $authHandler = new Akita_OAuth2_Server_AuthorizationHandler();
         try{
             $res = $authHandler->allowAuthorizationRequest($dataHandler);
+            $this->assertEquals('http://valid_redirect_uri/', $res['redirect_uri']);
             $this->assertEquals('test_code', $res['query']['code']);
             $this->assertEquals('test_state', $res['query']['state']);
         }catch(Akita_OAuth2_Server_Error $error){
@@ -516,6 +518,7 @@ class Akita_OAuth2_Server_AuthorizationHandler_Test extends PHPUnit_Framework_Te
         $authHandler = new Akita_OAuth2_Server_AuthorizationHandler();
         try{
             $res = $authHandler->allowAuthorizationRequest($dataHandler);
+            $this->assertEquals('http://valid_redirect_uri/', $res['redirect_uri']);
             $this->assertEquals('test_access_token', $res['fragment']['access_token']);
             $this->assertEquals(3600, $res['fragment']['expires_in']);
             $this->assertEquals('test_scope', $res['fragment']['scope']);
@@ -547,6 +550,7 @@ class Akita_OAuth2_Server_AuthorizationHandler_Test extends PHPUnit_Framework_Te
         $authHandler = new Akita_OAuth2_Server_AuthorizationHandler();
         try{
             $res = $authHandler->allowAuthorizationRequest($dataHandler);
+            $this->assertEquals('http://valid_redirect_uri/', $res['redirect_uri']);
             $this->assertEquals('test_access_token', $res['fragment']['access_token']);
             $this->assertEquals(3600, $res['fragment']['expires_in']);
             $this->assertEquals('test_scope', $res['fragment']['scope']);
@@ -577,6 +581,7 @@ class Akita_OAuth2_Server_AuthorizationHandler_Test extends PHPUnit_Framework_Te
         $authHandler = new Akita_OAuth2_Server_AuthorizationHandler();
         try{
             $res = $authHandler->allowAuthorizationRequest($dataHandler);
+            $this->assertEquals('http://valid_redirect_uri/', $res['redirect_uri']);
             $this->assertEquals('test_code', $res['fragment']['code']);
             $this->assertEquals('test_access_token', $res['fragment']['access_token']);
             $this->assertEquals(3600, $res['fragment']['expires_in']);
@@ -608,6 +613,7 @@ class Akita_OAuth2_Server_AuthorizationHandler_Test extends PHPUnit_Framework_Te
         $authHandler = new Akita_OAuth2_Server_AuthorizationHandler();
         try{
             $res = $authHandler->allowAuthorizationRequest($dataHandler);
+            $this->assertEquals('http://valid_redirect_uri/', $res['redirect_uri']);
             $this->assertEquals('test_code', $res['fragment']['code']);
             $this->assertEquals('test_access_token', $res['fragment']['access_token']);
             $this->assertEquals(3600, $res['fragment']['expires_in']);

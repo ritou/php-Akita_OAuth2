@@ -163,11 +163,13 @@ class Akita_OAuth2_Server_AuthorizationHandler
         }
         if(empty($params['access_token'])){
             $res = array(
+                'redirect_uri' => $request->param['redirect_uri'],
                 'query'     => $params,
                 'fragment'  => array()
             );
         }else{
             $res = array(
+                'redirect_uri' => $request->param['redirect_uri'],
                 'query'     => array(),
                 'fragment'  => $params
             );
@@ -193,11 +195,13 @@ class Akita_OAuth2_Server_AuthorizationHandler
         }
         if( $request->param['response_type'] == 'code' ){
             $res = array(
+                'redirect_uri' => $request->param['redirect_uri'],
                 'query'     => $params,
                 'fragment'  => array()
             );
         }else{
             $res = array(
+                'redirect_uri' => $request->param['redirect_uri'],
                 'query'     => array(),
                 'fragment'  => $params
             );
