@@ -65,7 +65,7 @@ class Akita_OAuth2_Server_Error extends Exception
         return $this->_oauth2ErrorDescription;
     }
 
-    final public function getOAuth2ErrorUri(){
+    public function getOAuth2ErrorUri(){
         return $this->_oauth2ErrorUri;
     }
 }

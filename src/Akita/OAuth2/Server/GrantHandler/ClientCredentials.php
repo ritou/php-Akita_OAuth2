@@ -58,8 +58,8 @@ class Akita_OAuth2_Server_GrantHandler_ClientCredentials
         // obtain AuthInfo from RefreshToken
         $authInfo = $dataHandler->createOrUpdateAuthInfo(
             array(
-                'client_id' => $client_id,
-                'user_id'   => null,
+                'clientId' => $client_id,
+                'userId'   => null,
                 'scope'     => $scope
             )
         );

@@ -115,8 +115,8 @@ class Akita_OAuth2_Server_AuthorizationHandler
 
         $authInfo = $dataHandler->createOrUpdateAuthInfo(
             array(
-                'client_id' => $client_id,
-                'user_id'   => $user_id,
+                'clientId' => $client_id,
+                'userId'   => $user_id,
                 'scope'     => $scope
             )
         );
