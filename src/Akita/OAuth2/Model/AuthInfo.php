@@ -9,7 +9,7 @@
  * @author    Ryo Ito <ritou.06@gmail.com>
  * @copyright 2012 Ryo Ito
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
- * @link      http://
+ * @link      http://openpear.org/package/Akita_OAuth2
  */
 class Akita_OAuth2_Model_AuthInfo
 {
