@@ -55,6 +55,13 @@ class Akita_OAuth2_Server_ProtectedResource
                 'invalid_token'
             );
         }
-        return $accessToken;
+        $authInfo = $dataHandler->getAuthInfoById($accessToken->authId);
+        if(is_null($authInfo)){
+            throw new Akita_OAuth2_Server_Error(
+                '500',
+                'server_error'
+            );
+        }
+        return $authInfo;
     }
 }

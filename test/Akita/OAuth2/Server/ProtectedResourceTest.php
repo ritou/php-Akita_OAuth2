@@ -32,7 +32,7 @@ class DataHandler_ProtectedResource_Test
     }
 
     public function getUserId(){
-        return $this->_userId;
+        return null;
     }
 
     public function getUserIdByCredentials( $username, $password ){
@@ -40,7 +40,7 @@ class DataHandler_ProtectedResource_Test
     }
 
     public function createOrUpdateAuthInfo( $params ){
-        return $this->_authInfo;
+        return null;
     }
 
     public function createOrUpdateAccessToken( $params ){
@@ -64,7 +64,7 @@ class DataHandler_ProtectedResource_Test
     }
 
     public function getAuthInfoById( $authId ){
-        return null;
+        return $this->_authInfo;
     }
 
     public function validateClient( $clientId, $clientSecret, $grantType ){
@@ -105,7 +105,7 @@ class Akita_OAuth2_Server_ProtectedResource_Test extends PHPUnit_Framework_TestC
         $protectedResource = new Akita_OAuth2_Server_ProtectedResource();
         try{
             unset($accessToken);
-            $accessToken = $protectedResource->processRequest($dataHandler);
+            $authInfo = $protectedResource->processRequest($dataHandler);
         }catch(Akita_OAuth2_Server_Error $error){
             $this->assertEquals('400', $error->getOAuth2Code(), $error->getMessage());
             $this->assertEquals('invalid_request', $error->getOAuth2Error(), $error->getMessage());
@@ -123,16 +123,36 @@ class Akita_OAuth2_Server_ProtectedResource_Test extends PHPUnit_Framework_TestC
         $request = new Akita_OAuth2_Server_Request('authorization', $server, $params);
         $accessToken = new Akita_OAuth2_Model_AccessToken();
         $accessToken->token = 'valid_access_token';
-        $accessToken->expiresIn = 3600;
-        $accessToken->scope = 'test_scope';
         $dataHandler = new DataHandler_ProtectedResource_Test($request, null, $accessToken);
         $protectedResource = new Akita_OAuth2_Server_ProtectedResource();
         try{
             unset($accessToken);
-            $accessToken = $protectedResource->processRequest($dataHandler);
+            $authInfo = $protectedResource->processRequest($dataHandler);
         }catch(Akita_OAuth2_Server_Error $error){
             $this->assertEquals('401', $error->getOAuth2Code(), $error->getMessage());
             $this->assertEquals('invalid_token', $error->getOAuth2Error(), $error->getMessage());
+            $this->assertEmpty($error->getOAuth2ErrorDescription(), $error->getMessage());
+        }
+    }
+
+    public function test_processRequest_server_error()
+    {
+        $server = array();
+        $params = array(
+            'response_type' => 'invalid',
+            'access_token' => 'valid_access_token'
+        );
+        $request = new Akita_OAuth2_Server_Request('authorization', $server, $params);
+        $accessToken = new Akita_OAuth2_Model_AccessToken();
+        $accessToken->token = 'valid_access_token';
+        $dataHandler = new DataHandler_ProtectedResource_Test($request, null, $accessToken);
+        $protectedResource = new Akita_OAuth2_Server_ProtectedResource();
+        try{
+            unset($accessToken);
+            $authInfo = $protectedResource->processRequest($dataHandler);
+        }catch(Akita_OAuth2_Server_Error $error){
+            $this->assertEquals('500', $error->getOAuth2Code(), $error->getMessage());
+            $this->assertEquals('server_error', $error->getOAuth2Error(), $error->getMessage());
             $this->assertEmpty($error->getOAuth2ErrorDescription(), $error->getMessage());
         }
     }
@@ -145,18 +165,16 @@ class Akita_OAuth2_Server_ProtectedResource_Test extends PHPUnit_Framework_TestC
             'access_token' => 'valid_access_token'
         );
         $request = new Akita_OAuth2_Server_Request('authorization', $server, $params);
+        $authInfo = new Akita_OAuth2_Model_AuthInfo();
+        $authInfo->clientId = 'valid_client_id';
         $accessToken = new Akita_OAuth2_Model_AccessToken();
         $accessToken->token = 'valid_access_token';
-        $accessToken->expiresIn = 3600;
-        $accessToken->scope = 'test_scope';
-        $dataHandler = new DataHandler_ProtectedResource_Test($request, null, $accessToken);
+        $dataHandler = new DataHandler_ProtectedResource_Test($request, $authInfo, $accessToken);
         $protectedResource = new Akita_OAuth2_Server_ProtectedResource();
         try{
             unset($accessToken);
-            $accessToken = $protectedResource->processRequest($dataHandler);
-            $this->assertEquals('valid_access_token', $accessToken->token, 'invalid response : access token');
-            $this->assertEquals(3600, $accessToken->expiresIn, 'invalid response : expires_in');
-            $this->assertEquals('test_scope', $accessToken->scope, 'invalid response : scope');
+            $authInfo = $protectedResource->processRequest($dataHandler);
+            $this->assertEquals('valid_client_id', $authInfo->clientId, 'invalid authInfo');
         }catch(Akita_OAuth2_Server_Error $error){
             $this->assertTrue(false, $error->getMessage());
         }
