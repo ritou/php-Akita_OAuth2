@@ -154,4 +154,14 @@ abstract class Akita_OAuth2_Server_DataHandler
      * @return boolen
      */
     abstract public function validateScopeForTokenRefresh( $scope, $authInfo);
+
+
+    /**
+     * remove Authorization Code from AuthInfo, and set Refresh Token
+     *
+     * @param string $scope Sope parameter
+     * @param Akita_OAuth2_Model_Authinfo $authInfo AuthInfo
+     * @return boolen
+     */
+    abstract public function setRefreshToken( $authInfo );
 }

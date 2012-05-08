@@ -42,7 +42,23 @@ class Akita_OAuth2_Server_GrantHandlers
      * @param string $grantType Grant Type
      * @return Akita_OAut2_Server_GrantHandler_* or null
      */
-    public static function getHandler( $grantType ){
+    public static function getHandler(  $grantType, 
+                                        $supportedGrantTypes=array(
+                                            'authorization_code',
+                                            'refresh_token',
+                                            'client_credentials',
+                                            'password'
+                                            )
+                                        ){
+
+        // check supported grant types
+        if(!in_array($grantType, $supportedGrantTypes)){
+            throw new Akita_OAuth2_Server_Error(
+                '400',
+                'unsupported_grant_type'
+            );
+        }
+
         switch ($grantType) {
             case 'authorization_code':
                 $handler = new Akita_OAuth2_Server_GrantHandler_AuthorizationCode();

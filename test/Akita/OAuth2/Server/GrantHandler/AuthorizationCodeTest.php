@@ -87,6 +87,10 @@ class DataHandler_AuthorizationCode_Test
     public function validateScopeForTokenRefresh( $scope, $authInfo){
         return false;
     }
+
+    public function setRefreshToken( $authInfo ){
+        return $authInfo;
+    }
 }
 
 class Akita_OAuth2_Server_GrantHandler_AuthorizationCode_Test extends PHPUnit_Framework_TestCase

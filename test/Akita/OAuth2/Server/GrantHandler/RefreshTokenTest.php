@@ -91,6 +91,10 @@ class DataHandler_RefreshToken_Test
             return true;
         }
     }
+
+    public function setRefreshToken( $authInfo ){
+        return false;
+    }
 }
 
 class Akita_OAuth2_Server_GrantHandler_RefreshToken_Test extends PHPUnit_Framework_TestCase

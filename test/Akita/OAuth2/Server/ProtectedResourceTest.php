@@ -90,6 +90,10 @@ class DataHandler_ProtectedResource_Test
     public function validateScopeForTokenRefresh( $scope, $authInfo){
         return false;
     }
+
+    public function setRefreshToken($authInfo){
+        return null;
+    }
 }
 
 class Akita_OAuth2_Server_ProtectedResource_Test extends PHPUnit_Framework_TestCase

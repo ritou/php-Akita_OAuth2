@@ -91,6 +91,9 @@ class Akita_OAuth2_Server_GrantHandler_AuthorizationCode
             );
         }
 
+        // remove authorization code from authInfo
+        $authInfo = $dataHandler->setRefreshToken($authInfo);
+
         // obtain AccessToken from AuthInfo
         $accessToken = $dataHandler->createOrUpdateAccessToken(
             array(

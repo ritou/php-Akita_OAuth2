@@ -91,6 +91,10 @@ class DataHandler_Password_Test
     public function validateScopeForTokenRefresh( $scope, $authInfo){
         return false;
     }
+
+    public function setRefreshToken( $authInfo ){
+        return false;
+    }
 }
 
 class Akita_OAuth2_Server_GrantHandler_Password_Test extends PHPUnit_Framework_TestCase

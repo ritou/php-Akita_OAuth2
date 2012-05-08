@@ -37,11 +37,11 @@ class Akita_OAuth2_Server_AuthorizationHandler
      *
      * @param Akita_OAuth2_Server_DataHandler $dataHandler
      */
-    public function processAuthorizationRequest($dataHandler)
+    public function processAuthorizationRequest($dataHandler, $allowed_response_type=array('code', 'token', 'code token'))
     {
         $request = $dataHandler->getRequest();
 
-        $response_type = $request->param['response_type'];
+        $response_type = (isset($request->param['response_type'])) ? $request->param['response_type'] : "";
         if (empty($response_type)) {
             throw new Akita_OAuth2_Server_Error(
                 '400',
@@ -49,7 +49,7 @@ class Akita_OAuth2_Server_AuthorizationHandler
                 "'response_type' is required"
             );
         }
-        if(!in_array($response_type, array('code', 'token', 'code token'))){
+        if(!in_array($response_type, $allowed_response_type)){
             throw new Akita_OAuth2_Server_Error(
                 '400',
                 'unsupported_response_type'
@@ -57,7 +57,7 @@ class Akita_OAuth2_Server_AuthorizationHandler
         }
         
         // validate client_id
-        $client_id = $request->param['client_id'];
+        $client_id = (isset($request->param['client_id'])) ? $request->param['client_id'] : "" ;
         if (empty($client_id)) {
             throw new Akita_OAuth2_Server_Error(
                 '400',
@@ -73,7 +73,7 @@ class Akita_OAuth2_Server_AuthorizationHandler
         }
 
         // validate redirect_uri
-        $redirect_uri = $request->param['redirect_uri'];
+        $redirect_uri = (isset($request->param['redirect_uri'])) ? $request->param['redirect_uri'] : "";
         if(empty($redirect_uri)){
             throw new Akita_OAuth2_Server_Error(
                 '400',
@@ -90,7 +90,7 @@ class Akita_OAuth2_Server_AuthorizationHandler
         }
 
         // validate scope
-        $scope = $request->param['scope'];
+        $scope = (isset($request->param['scope'])) ? $request->param['scope'] : "";
         if(!$dataHandler->validateScope($client_id, $scope)){
             throw new Akita_OAuth2_Server_Error(
                 '400',
@@ -158,7 +158,7 @@ class Akita_OAuth2_Server_AuthorizationHandler
             $params['code'] = $authInfo->code;
         }
 
-        $state = $request->param['state'];
+        $state = (isset($request->param['state'])) ? $request->param['state'] : "";
         if(!empty($state)){
             $params['state'] = $state;
         }
@@ -190,7 +190,7 @@ class Akita_OAuth2_Server_AuthorizationHandler
         
         // build response
         $params['error'] = 'access_denied';
-        $state = $request->param['state'];
+        $state = (isset($request->param['state'])) ? $request->param['state'] : "";
         if(!empty($state)){
             $params['state'] = $state;
         }

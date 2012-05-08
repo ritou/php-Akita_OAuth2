@@ -60,7 +60,7 @@ class Akita_OAuth2_Server_Request
 
     public function getAccessToken(){
         $accessToken = $this->param['access_token'];
-        $authorizationHeader = $this->header['Authorization'];
+        $authorizationHeader = (isset($this->header['Authorization'])) ? $this->header['Authorization'] : "";
         if(!empty($authorizationHeader) && substr($authorizationHeader, 0, 7) == 'Bearer '){
             $accessToken = ltrim(substr($authorizationHeader, 7));
         }
