@@ -37,7 +37,7 @@ class Akita_OAuth2_Server_GrantHandler_RefreshToken
     {
         $request = $dataHandler->getRequest();
 
-        $refresh_token = $request->param['refresh_token'];
+        $refresh_token = (isset($request->param['refresh_token'])) ? $request->param['refresh_token'] : "";
         if(empty($refresh_token)){
             throw new Akita_OAuth2_Server_Error(
                 '400',
@@ -47,8 +47,8 @@ class Akita_OAuth2_Server_GrantHandler_RefreshToken
         }
 
         // validate client credential
-        $client_id = $request->param['client_id'];
-        $client_secret = $request->param['client_secret'];
+        $client_id = (isset($request->param['client_id'])) ? $request->param['client_id'] : "";
+        $client_secret = (isset($request->param['client_secret'])) ? $request->param['client_secret'] : "";
         if(!$dataHandler->validateClient($client_id, $client_secret, 'refresh_token')){
             throw new Akita_OAuth2_Server_Error(
                 '401',

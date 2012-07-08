@@ -38,8 +38,8 @@ class Akita_OAuth2_Server_GrantHandler_ClientCredentials
         $request = $dataHandler->getRequest();
 
         // validate client credential
-        $client_id = $request->param['client_id'];
-        $client_secret = $request->param['client_secret'];
+        $client_id = (isset($request->param['client_id'])) ? $request->param['client_id'] : "";
+        $client_secret = (isset($request->param['client_secret'])) ? $request->param['client_secret'] : "";
         if(!$dataHandler->validateClient($client_id, $client_secret, 'clientcredentials')){
             throw new Akita_OAuth2_Server_Error(
                 '401',
@@ -47,7 +47,7 @@ class Akita_OAuth2_Server_GrantHandler_ClientCredentials
             );
         }
 
-        $scope = $request->param['scope'];
+        $scope = (isset($request->param['scope'])) ? $request->param['scope'] : "";
         if(!$dataHandler->validateScope($client_id, $scope)){
             throw new Akita_OAuth2_Server_Error(
                 '400',

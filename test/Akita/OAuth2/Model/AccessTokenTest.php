@@ -58,7 +58,8 @@ class Akita_OAuth2_Model_AccessToken_Test extends PHPUnit_Framework_TestCase
         $expect_response = array(
             'access_token'  => 'token_str',
             'expires_in'  => 3600,
-            'scope'  => 'scope_str'
+            'scope'  => 'scope_str',
+            'token_type'  => 'Bearer'
         );
         $this->assertEquals($expect_response, $authinfo->getResponse());
     }

@@ -41,7 +41,7 @@ class Akita_OAuth2_Server_Request
     {
         $this->param = $params;
         $this->header = $headers;
-        $this->method = $server['REQUEST_METHOD'];
+        $this->method = (isset($server['REQUEST_METHOD'])) ? $server['REQUEST_METHOD'] : "GET";
 
         if( $endpoint_type=='token' &&
             $this->method=='POST')
@@ -59,7 +59,7 @@ class Akita_OAuth2_Server_Request
     }
 
     public function getAccessToken(){
-        $accessToken = $this->param['access_token'];
+        $accessToken = (isset($this->param['access_token'])) ? $this->param['access_token'] : "";
         $authorizationHeader = (isset($this->header['Authorization'])) ? $this->header['Authorization'] : "";
         if(!empty($authorizationHeader) && substr($authorizationHeader, 0, 7) == 'Bearer '){
             $accessToken = ltrim(substr($authorizationHeader, 7));

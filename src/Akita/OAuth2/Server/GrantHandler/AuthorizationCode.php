@@ -37,7 +37,7 @@ class Akita_OAuth2_Server_GrantHandler_AuthorizationCode
     {
         $request = $dataHandler->getRequest();
 
-        $code = $request->param['code'];
+        $code = (isset($request->param['code'])) ? $request->param['code'] : "";
         if(empty($code)){
             throw new Akita_OAuth2_Server_Error(
                 '400',
@@ -46,7 +46,7 @@ class Akita_OAuth2_Server_GrantHandler_AuthorizationCode
             );
         }
 
-        $redirect_uri = $request->param['redirect_uri'];
+        $redirect_uri = (isset($request->param['redirect_uri'])) ? $request->param['redirect_uri'] : "";
         if(empty($redirect_uri)){
             throw new Akita_OAuth2_Server_Error(
                 '400',
@@ -56,8 +56,8 @@ class Akita_OAuth2_Server_GrantHandler_AuthorizationCode
         }
 
         // validate client credential
-        $client_id = $request->param['client_id'];
-        $client_secret = $request->param['client_secret'];
+        $client_id = (isset($request->param['client_id'])) ? $request->param['client_id'] : "";
+        $client_secret = (isset($request->param['client_secret'])) ? $request->param['client_secret'] : "";
         if(!$dataHandler->validateClient($client_id, $client_secret, 'authorization_code')){
             throw new Akita_OAuth2_Server_Error(
                 '401',

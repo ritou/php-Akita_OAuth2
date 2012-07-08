@@ -35,7 +35,8 @@ class Akita_OAuth2_Model_AccessToken
         $res = array(
             'access_token'  => $this->token,
             'expires_in'  => $this->expiresIn,
-            'scope'  => $this->scope
+            'scope'  => $this->scope,
+            'token_type' => 'Bearer'
         );
         return $res;
     }

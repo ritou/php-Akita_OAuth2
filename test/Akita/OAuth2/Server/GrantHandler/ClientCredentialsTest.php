@@ -192,7 +192,7 @@ class Akita_OAuth2_Server_GrantHandler_ClientCredentials_Test extends PHPUnit_Fr
             $this->assertEquals('test_access_token', $res["access_token"], 'invalid response : access token');
             $this->assertEquals(3600, $res["expires_in"], 'invalid response : expires_in');
             $this->assertEquals('test_scope', $res["scope"], 'invalid response : scope');
-            $this->assertEmpty($res["refresh_token"], 'invalid response : refresh token is not required');
+            $this->assertEmpty(@$res["refresh_token"], 'invalid response : refresh token is not required');
         }catch(Akita_OAuth2_Server_Error $error){
             $this->assertTrue(false, $error->getMessage());
         }

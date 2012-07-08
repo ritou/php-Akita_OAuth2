@@ -287,7 +287,7 @@ class Akita_OAuth2_Server_AuthorizationHandler_Test extends PHPUnit_Framework_Te
         try{
             $res = $authHandler->denyAuthorizationRequest($dataHandler);
             $this->assertEquals('access_denied', $res['query']['error']);
-            $this->assertEmpty($res['query']['state']);
+            $this->assertEmpty(@$res['query']['state']);
         }catch(Akita_OAuth2_Server_Error $error){
             $this->assertTrue(false, $error->getMessage());
         }
@@ -330,7 +330,7 @@ class Akita_OAuth2_Server_AuthorizationHandler_Test extends PHPUnit_Framework_Te
         try{
             $res = $authHandler->denyAuthorizationRequest($dataHandler);
             $this->assertEquals('access_denied', $res['fragment']['error']);
-            $this->assertEmpty($res['fragment']['state']);
+            $this->assertEmpty(@$res['fragment']['state']);
         }catch(Akita_OAuth2_Server_Error $error){
             $this->assertTrue(false, $error->getMessage());
         }
@@ -373,7 +373,7 @@ class Akita_OAuth2_Server_AuthorizationHandler_Test extends PHPUnit_Framework_Te
         try{
             $res = $authHandler->denyAuthorizationRequest($dataHandler);
             $this->assertEquals('access_denied', $res['fragment']['error']);
-            $this->assertEmpty($res['fragment']['state']);
+            $this->assertEmpty(@$res['fragment']['state']);
         }catch(Akita_OAuth2_Server_Error $error){
             $this->assertTrue(false, $error->getMessage());
         }
@@ -467,7 +467,7 @@ class Akita_OAuth2_Server_AuthorizationHandler_Test extends PHPUnit_Framework_Te
             $res = $authHandler->allowAuthorizationRequest($dataHandler);
             $this->assertEquals('http://valid_redirect_uri/', $res['redirect_uri']);
             $this->assertEquals('test_code', $res['query']['code']);
-            $this->assertEmpty($res['query']['state']);
+            $this->assertEmpty(@$res['query']['state']);
         }catch(Akita_OAuth2_Server_Error $error){
             $this->assertTrue(false, $error->getMessage());
         }
@@ -526,8 +526,8 @@ class Akita_OAuth2_Server_AuthorizationHandler_Test extends PHPUnit_Framework_Te
             $this->assertEquals('test_access_token', $res['fragment']['access_token']);
             $this->assertEquals(3600, $res['fragment']['expires_in']);
             $this->assertEquals('test_scope', $res['fragment']['scope']);
-            $this->assertEmpty($res['fragment']['code']);
-            $this->assertEmpty($res['fragment']['state']);
+            $this->assertEmpty(@$res['fragment']['code']);
+            $this->assertEmpty(@$res['fragment']['state']);
         }catch(Akita_OAuth2_Server_Error $error){
             $this->assertTrue(false, $error->getMessage());
         }
@@ -558,7 +558,7 @@ class Akita_OAuth2_Server_AuthorizationHandler_Test extends PHPUnit_Framework_Te
             $this->assertEquals('test_access_token', $res['fragment']['access_token']);
             $this->assertEquals(3600, $res['fragment']['expires_in']);
             $this->assertEquals('test_scope', $res['fragment']['scope']);
-            $this->assertEmpty($res['fragment']['code']);
+            $this->assertEmpty(@$res['fragment']['code']);
             $this->assertEquals('test_state', $res['fragment']['state']);
         }catch(Akita_OAuth2_Server_Error $error){
             $this->assertTrue(false, $error->getMessage());
@@ -590,7 +590,7 @@ class Akita_OAuth2_Server_AuthorizationHandler_Test extends PHPUnit_Framework_Te
             $this->assertEquals('test_access_token', $res['fragment']['access_token']);
             $this->assertEquals(3600, $res['fragment']['expires_in']);
             $this->assertEquals('test_scope', $res['fragment']['scope']);
-            $this->assertEmpty($res['fragment']['state']);
+            $this->assertEmpty(@$res['fragment']['state']);
         }catch(Akita_OAuth2_Server_Error $error){
             $this->assertTrue(false, $error->getMessage());
         }
