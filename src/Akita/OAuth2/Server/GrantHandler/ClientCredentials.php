@@ -32,6 +32,7 @@ require_once dirname(__FILE__) . '/../Error.php';
  * @link      http://openpear.org/package/Akita_OAuth2
  */
 class Akita_OAuth2_Server_GrantHandler_ClientCredentials
+    implements Akita_OAuth2_Server_GrantHandler
 {
     public function handleRequest($dataHandler)
     {
